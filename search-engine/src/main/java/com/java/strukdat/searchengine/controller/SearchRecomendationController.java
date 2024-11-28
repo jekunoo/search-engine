@@ -1,7 +1,6 @@
 package com.java.strukdat.searchengine.controller;
 
 import java.io.IOException;
-
 import com.java.util.Gimmick;
 
 import javafx.event.ActionEvent;
@@ -22,34 +21,42 @@ public class SearchRecomendationController {
     private TextField searchField;
     @FXML
     private ListView<String> suggestionsList;
+    @FXML
 
     private Gimmick<String> gimmick;
 
     @FXML
     public void initialize() {
-        
-        // inisiasi gimmick
-        gimmick = new Gimmick<>(rootPane);
-    }
-
-    // method menerima keyword
-    public void setKeyword(String keyword){
-        if (keyword != null && !keyword.isEmpty()) {
-            // menampilkan hasil gimmick
-            String result = gimmick.gimmick(keyword);
-            System.out.println(result);
-            
+        // Pastikan rootPane telah terhubung
+        if (rootPane == null) {
+            System.err.println("rootPane belum diinisialisasi! Periksa FXML.");
+        } else {
+            // Inisialisasi Gimmick setelah rootPane tersedia
+            gimmick = new Gimmick<>(rootPane);
         }
     }
-    @FXML
-    public void onActionSearchButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/search-recomendation.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
 
-        stage.setScene(new Scene(root));
-        stage.show();
+    // Method untuk menerima keyword
+    public void setKeyword(String keyword) {
+        if (keyword != null && !keyword.isEmpty()) {
+            if (gimmick != null) {
+                // Menampilkan hasil gimmick
+                String result = gimmick.gimmick(keyword);
+                System.out.println("Hasil Gimmick: " + result);
+            } else {
+                System.err.println("Gimmick belum diinisialisasi!");
+            }
+        }
     }
 
-    
+    @FXML
+    public void onActionSearchButton(ActionEvent event) throws IOException {
+        // Ganti scene di window yang sama
+        Stage currentStage = (Stage) searchField.getScene().getWindow(); // Dapatkan stage saat ini
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/Updated-Search-Result.fxml"));
+        Parent root = loader.load();
+
+        // Atur scene baru ke stage saat ini
+        currentStage.setScene(new Scene(root));
+    }
 }

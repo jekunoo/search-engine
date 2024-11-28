@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/search-result.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/landing-page.fxml"));
 
         primaryStage.setTitle("Search with Suggestions");
         primaryStage.setScene(new Scene(root, 1080, 720));
