@@ -91,7 +91,7 @@ public class LandingPageController {
     }
 
     private void openSearchRecommendation(String keyword, Stage currentStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/search-recomendation.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/Updated-Search-Result.fxml"));
         Parent root = fxmlLoader.load();
 
         // Pass the keyword to the controller
