@@ -23,7 +23,7 @@
                      <children>
                         <Label prefHeight="50.0" prefWidth="139.0" style="-fx-font-size: 36; -fx-font-family: 'Impact';" text="CONAN." textFill="WHITE" />
                         <TextField fx:id="searchField" prefHeight="30.0" prefWidth="253.0" promptText="Search for something..." style="-fx-background-color: #FFFFFF; -fx-border-radius: 5; -fx-padding: 5; -fx-font-size: 14;" />
-                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onActionSearchButton" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: Blue;" text="Search" textFill="WHITE" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onActionSearchButton" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: Blue;" text="Search" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

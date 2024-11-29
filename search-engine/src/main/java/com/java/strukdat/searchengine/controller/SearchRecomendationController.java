@@ -1,6 +1,8 @@
 package com.java.strukdat.searchengine.controller;
 
 import java.io.IOException;
+
+import com.java.strukdat.searchengine.model.RedBlackTree;
 import com.java.util.Gimmick;
 
 import javafx.event.ActionEvent;
@@ -25,6 +27,8 @@ public class SearchRecomendationController {
 
     private Gimmick<String> gimmick;
 
+    private String keyword;
+
     @FXML
     public void initialize() {
         // Pastikan rootPane telah terhubung
@@ -38,6 +42,7 @@ public class SearchRecomendationController {
 
     // Method untuk menerima keyword
     public void setKeyword(String keyword) {
+        this.keyword = keyword;
         if (keyword != null && !keyword.isEmpty()) {
             if (gimmick != null) {
                 // Menampilkan hasil gimmick
