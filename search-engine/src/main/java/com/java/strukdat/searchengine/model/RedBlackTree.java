@@ -1,210 +1,131 @@
 package com.java.strukdat.searchengine.model;
 
 
-// Implementing Red-Black Tree in Java
-
-
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class RedBlackTree {
     private Node root;
     private Node TNULL;
 
+    public Node search(String key) {
+        return searchHelper(this.root, key);
+    }
+
+    private Node searchHelper(Node node, String key) {
+        if (node == TNULL || key.equalsIgnoreCase(node.key)) {
+            return node;
+        }
+
+        if (key.compareToIgnoreCase(node.key) < 0) {
+            return searchHelper(node.left, key);
+        } else {
+            return searchHelper(node.right, key);
+        }
+    }
+
+    public List<Node> searchBySubstring(String substring) {
+        List<Node> result = new ArrayList<>();
+        searchBySubstringHelper(this.root, substring.toLowerCase(), result);
+        return result;
+    }
+
+    // Helper method for searchBySubstring
+    private void searchBySubstringHelper(Node node, String substring, List<Node> result) {
+        if (node == TNULL) {
+            return; // Base case: reached a leaf
+        }
+
+        // Check if the current node's key contains the substring
+        if (node.key.toLowerCase().contains(substring)) {
+            result.add(node);
+        }
+
+        // Recursively search in the left and right subtrees
+        searchBySubstringHelper(node.left, substring, result);
+        searchBySubstringHelper(node.right, substring, result);
+    }
+
+    public void visualize() {
+        if (root == TNULL) {
+            System.out.println("The tree is empty.");
+            return;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        int level = 0;
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            System.out.print("Level " + level + ": ");
+            for (int i = 0; i < levelSize; i++) {
+                Node node = queue.poll();
+                if (node == TNULL) {
+                    System.out.print("TNULL ");
+                } else {
+                    System.out.print((node.isRed ? "R" : "B") + "(" + node.key + ") ");
+                    queue.add(node.left);
+                    queue.add(node.right);
+                }
+            }
+            System.out.println();
+            level++;
+        }
+    }
+
     // Preorder
     private void preOrderHelper(Node node) {
         if (node != TNULL) {
-            System.out.print(node.data + " ");
+            System.out.print(node.key + " ");
             preOrderHelper(node.left);
             preOrderHelper(node.right);
         }
     }
 
-    // Inorder
-    private void inOrderHelper(Node node) {
-        if (node != TNULL) {
-            inOrderHelper(node.left);
-            System.out.print(node.data + " ");
-            inOrderHelper(node.right);
-        }
-    }
-
-    // Post order
-    private void postOrderHelper(Node node) {
-        if (node != TNULL) {
-            postOrderHelper(node.left);
-            postOrderHelper(node.right);
-            System.out.print(node.data + " ");
-        }
-    }
-
-    // Search the tree
-    private Node searchTreeHelper(Node node, int key) {
-        if (node == TNULL || key == node.data) {
-            return node;
-        }
-
-        if (key < node.data) {
-            return searchTreeHelper(node.left, key);
-        }
-        return searchTreeHelper(node.right, key);
-    }
-
     // Balance the tree after deletion of a node
-    private void fixDelete(Node x) {
-        Node s;
-        while (x != root && x.color == 0) {
-            if (x == x.parent.left) {
-                s = x.parent.right;
-                if (s.color == 1) {
-                    s.color = 0;
-                    x.parent.color = 1;
-                    leftRotate(x.parent);
-                    s = x.parent.right;
-                }
-
-                if (s.left.color == 0 && s.right.color == 0) {
-                    s.color = 1;
-                    x = x.parent;
-                } else {
-                    if (s.right.color == 0) {
-                        s.left.color = 0;
-                        s.color = 1;
-                        rightRotate(s);
-                        s = x.parent.right;
-                    }
-
-                    s.color = x.parent.color;
-                    x.parent.color = 0;
-                    s.right.color = 0;
-                    leftRotate(x.parent);
-                    x = root;
-                }
-            } else {
-                s = x.parent.left;
-                if (s.color == 1) {
-                    s.color = 0;
-                    x.parent.color = 1;
-                    rightRotate(x.parent);
-                    s = x.parent.left;
-                }
-
-                if (s.right.color == 0 && s.right.color == 0) {
-                    s.color = 1;
-                    x = x.parent;
-                } else {
-                    if (s.left.color == 0) {
-                        s.right.color = 0;
-                        s.color = 1;
-                        leftRotate(s);
-                        s = x.parent.left;
-                    }
-
-                    s.color = x.parent.color;
-                    x.parent.color = 0;
-                    s.left.color = 0;
-                    rightRotate(x.parent);
-                    x = root;
-                }
-            }
-        }
-        x.color = 0;
-    }
-
-    private void rbTransplant(Node u, Node v) {
-        if (u.parent == null) {
-            root = v;
-        } else if (u == u.parent.left) {
-            u.parent.left = v;
-        } else {
-            u.parent.right = v;
-        }
-        v.parent = u.parent;
-    }
-
-    private void deleteNodeHelper(Node node, int key) {
-        Node z = TNULL;
-        Node x, y;
-        while (node != TNULL) {
-            if (node.data == key) {
-                z = node;
-            }
-
-            if (node.data <= key) {
-                node = node.right;
-            } else {
-                node = node.left;
-            }
-        }
-
-        if (z == TNULL) {
-            System.out.println("Couldn't find key in the tree");
-            return;
-        }
-
-        y = z;
-        int yOriginalColor = y.color;
-        if (z.left == TNULL) {
-            x = z.right;
-            rbTransplant(z, z.right);
-        } else if (z.right == TNULL) {
-            x = z.left;
-            rbTransplant(z, z.left);
-        } else {
-            y = minimum(z.right);
-            yOriginalColor = y.color;
-            x = y.right;
-            if (y.parent == z) {
-                x.parent = y;
-            } else {
-                rbTransplant(y, y.right);
-                y.right = z.right;
-                y.right.parent = y;
-            }
-
-            rbTransplant(z, y);
-            y.left = z.left;
-            y.left.parent = y;
-            y.color = z.color;
-        }
-        if (yOriginalColor == 0) {
-            fixDelete(x);
-        }
-    }
-
-    // Balance the node after insertion
     private void fixInsert(Node k) {
         Node u;
-        while (k.parent.color == 1) {
+        while (k.parent != null && k.parent.isRed) { // Check if parent is not null
             if (k.parent == k.parent.parent.right) {
-                u = k.parent.parent.left;
-                if (u.color == 1) {
-                    u.color = 0;
-                    k.parent.color = 0;
-                    k.parent.parent.color = 1;
+                u = k.parent.parent.left; // uncle
+                if (u.isRed) {
+                    // case 3.1
+                    u.isRed = false;
+                    k.parent.isRed = false;
+                    k.parent.parent.isRed = true;
                     k = k.parent.parent;
                 } else {
                     if (k == k.parent.left) {
+                        // case 3.2.2
                         k = k.parent;
                         rightRotate(k);
                     }
-                    k.parent.color = 0;
-                    k.parent.parent.color = 1;
+                    // case 3.2.1
+                    k.parent.isRed = false;
+                    k.parent.parent.isRed = true;
                     leftRotate(k.parent.parent);
                 }
             } else {
-                u = k.parent.parent.right;
+                u = k.parent.parent.right; // uncle
 
-                if (u.color == 1) {
-                    u.color = 0;
-                    k.parent.color = 0;
-                    k.parent.parent.color = 1;
+                if (u.isRed) {
+                    // mirror case 3.1
+                    u.isRed = false;
+                    k.parent.isRed = false;
+                    k.parent.parent.isRed = true;
                     k = k.parent.parent;
                 } else {
                     if (k == k.parent.right) {
+                        // mirror case 3.2.2
                         k = k.parent;
                         leftRotate(k);
                     }
-                    k.parent.color = 0;
-                    k.parent.parent.color = 1;
+                    // mirror case 3.2.1
+                    k.parent.isRed = false;
+                    k.parent.parent.isRed = true;
                     rightRotate(k.parent.parent);
                 }
             }
@@ -212,93 +133,10 @@ public class RedBlackTree {
                 break;
             }
         }
-        root.color = 0;
+        root.isRed = false; // Ensure the root is black
     }
 
-    private void printHelper(Node root, String indent, boolean last) {
-        if (root != TNULL) {
-            System.out.print(indent);
-            if (last) {
-                System.out.print("R----");
-                indent += "   ";
-            } else {
-                System.out.print("L----");
-                indent += "|  ";
-            }
-
-            String sColor = root.color == 1 ? "RED" : "BLACK";
-            System.out.println(root.data + "(" + sColor + ")");
-            printHelper(root.left, indent, false);
-            printHelper(root.right, indent, true);
-        }
-    }
-
-    public RedBlackTree() {
-        TNULL = new Node();
-        TNULL.color = 0;
-        TNULL.left = null;
-        TNULL.right = null;
-        root = TNULL;
-    }
-
-    public void preorder() {
-        preOrderHelper(this.root);
-    }
-
-    public void inorder() {
-        inOrderHelper(this.root);
-    }
-
-    public void postorder() {
-        postOrderHelper(this.root);
-    }
-
-    public Node searchTree(int k) {
-        return searchTreeHelper(this.root, k);
-    }
-
-    public Node minimum(Node node) {
-        while (node.left != TNULL) {
-            node = node.left;
-        }
-        return node;
-    }
-
-    public Node maximum(Node node) {
-        while (node.right != TNULL) {
-            node = node.right;
-        }
-        return node;
-    }
-
-    public Node successor(Node x) {
-        if (x.right != TNULL) {
-            return minimum(x.right);
-        }
-
-        Node y = x.parent;
-        while (y != TNULL && x == y.right) {
-            x = y;
-            y = y.parent;
-        }
-        return y;
-    }
-
-    public Node predecessor(Node x) {
-        if (x.left != TNULL) {
-            return maximum(x.left);
-        }
-
-        Node y = x.parent;
-        while (y != TNULL && x == y.left) {
-            x = y;
-            y = y.parent;
-        }
-
-        return y;
-    }
-
-    public void leftRotate(Node x) {
+    private void leftRotate(Node x) {
         Node y = x.right;
         x.right = y.left;
         if (y.left != TNULL) {
@@ -316,7 +154,7 @@ public class RedBlackTree {
         x.parent = y;
     }
 
-    public void rightRotate(Node x) {
+    private void rightRotate(Node x) {
         Node y = x.left;
         x.left = y.right;
         if (y.right != TNULL) {
@@ -334,20 +172,24 @@ public class RedBlackTree {
         x.parent = y;
     }
 
-    public void insert(int key) {
-        Node node = new Node();
+    public RedBlackTree() {
+        TNULL = new Node("", "", ""); // Sentinel node
+        TNULL.isRed = false;
+        root = TNULL;
+    }
+
+    public void insert(String key, String value, String content) {
+        Node node = new Node(key, value, content);
         node.parent = null;
-        node.data = key;
         node.left = TNULL;
         node.right = TNULL;
-        node.color = 1;
 
         Node y = null;
         Node x = this.root;
 
         while (x != TNULL) {
             y = x;
-            if (node.data < x.data) {
+            if (node.key.compareTo(x.key) < 0) {
                 x = x.left;
             } else {
                 x = x.right;
@@ -357,34 +199,37 @@ public class RedBlackTree {
         node.parent = y;
         if (y == null) {
             root = node;
-        } else if (node.data < y.data) {
+        } else if (node.key.compareTo(y.key) < 0) {
             y.left = node;
         } else {
             y.right = node;
         }
 
-        if (node.parent == null) {
-            node.color = 0;
-            return;
-        }
-
-        if (node.parent.parent == null) {
-            return;
-        }
-
+        // Fix the tree
         fixInsert(node);
     }
 
-    public Node getRoot() {
-        return this.root;
-    }
-
-    public void deleteNode(int data) {
-        deleteNodeHelper(this.root, data);
+    // Preorder traversal
+    public void preOrder() {
+        preOrderHelper(this.root);
     }
 
     public void printTree() {
-        printHelper(this.root, "", true);
+        printTreeHelper(this.root, 0);
+    }
+
+    private void printTreeHelper(Node node, int space) {
+        if (node == TNULL) return;
+
+        space += 10; // Increase distance between levels
+
+        printTreeHelper(node.right, space); // Process right child first
+
+        System.out.println();
+        for (int i = 10; i < space; i++) System.out.print(" "); // Print spaces
+        System.out.print(node.key + (node.isRed ? "R" : "B") + "\n"); // Print node key and color
+
+        printTreeHelper(node.left, space); // Process left child
     }
 
 }
