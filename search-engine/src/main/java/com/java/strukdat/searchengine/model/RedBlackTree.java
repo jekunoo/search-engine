@@ -26,26 +26,48 @@ public class RedBlackTree {
         }
     }
 
-    public List<Node> searchBySubstring(String substring) {
+    public List<Node> searchByPrefix(String prefix) {
         List<Node> result = new ArrayList<>();
-        searchBySubstringHelper(this.root, substring.toLowerCase(), result);
+        searchByPrefixHelper(this.root, prefix.toLowerCase(), result);
         return result;
     }
 
-    // Helper method for searchBySubstring
-    private void searchBySubstringHelper(Node node, String substring, List<Node> result) {
+    private void searchByPrefixHelper(Node node, String prefix, List<Node> result) {
         if (node == TNULL) {
             return; // Base case: reached a leaf
         }
 
-        // Check if the current node's key contains the substring
-        if (node.key.toLowerCase().contains(substring)) {
+        // Check if the current node's key starts with the prefix
+        if (node.key.toLowerCase().startsWith(prefix)) {
             result.add(node);
         }
 
         // Recursively search in the left and right subtrees
-        searchBySubstringHelper(node.left, substring, result);
-        searchBySubstringHelper(node.right, substring, result);
+        if (prefix.compareToIgnoreCase(node.key) < 0) {
+            searchByPrefixHelper(node.left, prefix, result);
+        } else {
+            searchByPrefixHelper(node.right, prefix, result);
+        }
+    }
+
+    public Node searchByKey(String key) {
+        Node currentNode = root;
+
+        // Traverse the tree to find the node with the given key
+        while (currentNode != TNULL) {
+            int compareResult = key.compareToIgnoreCase(currentNode.key);
+
+            if (compareResult == 0) {
+                return currentNode; // Found the node
+            } else if (compareResult < 0) {
+                currentNode = currentNode.left; // Go left
+            } else {
+                currentNode = currentNode.right; // Go right
+            }
+        }
+
+        // If not found, return null
+        return null;
     }
 
     public void visualize() {

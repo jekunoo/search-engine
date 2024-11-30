@@ -3,14 +3,14 @@ package com.java.strukdat.searchengine.model;
 public class Node {
     String key;
     String value;
-    String content;
+    String imgPath;
     Node left, right, parent;
     boolean isRed; // true if red, false if black
 
-    public Node(String key, String value, String content) {
+    public Node(String key, String value, String imgPath) {
         this.key = key;
         this.value = value;
-        this.content = content;
+        this.imgPath = imgPath;
         this.left = null;
         this.right = null;
         this.parent = null;
@@ -22,7 +22,7 @@ public class Node {
     }
 
     public String getContent() {
-        return content;
+        return imgPath;
     }
 
     public String getValue() {

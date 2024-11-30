@@ -55,7 +55,7 @@ public class LandingPageController {
             } else {
                 // Perform the search in the RedBlackTree
                 String lowerCaseSearch = newValue.toLowerCase();
-                List<Node> results = tree.searchBySubstring(lowerCaseSearch);
+                List<Node> results = tree.searchByPrefix(lowerCaseSearch);
 
                 // Add matching keys to the filteredItems list
                 for (Node node : results) {
@@ -110,7 +110,7 @@ public class LandingPageController {
     }
 
     private void openSearchRecommendation(String keyword, Stage currentStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/Updated-Search-Result.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/search-recomendation.fxml"));
         Parent root = fxmlLoader.load();
 
         // Pass the keyword to the controller
