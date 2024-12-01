@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -36,6 +37,8 @@ public class SearchRecomendationController {
     private VBox suggestionsRecomendationItem;
     @FXML
     private Text resultText; // Text untuk menampilkan hasil pencarian
+    @FXML
+    private AnchorPane componentField;
 
     private ObservableList<String> filteredItems = FXCollections.observableArrayList();
     private static final int ITEM_HEIGHT = 26; // Tinggi setiap item
@@ -114,46 +117,6 @@ public class SearchRecomendationController {
 
     }
 
-    // Method to load the detail page
-    private void openDetailPage(Node node) {
-        try {
-            // Load FXML for the detail page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/detail-page.fxml"));
-            Parent detailPage = loader.load();
-
-            // Get the controller for the detail page
-            DetailPageController controller = loader.getController();
-
-            if (node != null) {
-                controller.setNodeData(node);  // Only set data if the node is not null
-            } else {
-                System.out.println("Node is null, cannot set data in detail page.");
-            }
-
-            // Pass the current scene to the DetailPageController
-            controller.setPreviousScene(rootPane.getScene()); // rootPane is part of SearchRecomendationController
-
-            // Create a new scene and show it
-            Scene detailScene = new Scene(detailPage);
-            Stage stage = (Stage) rootPane.getScene().getWindow(); // Now rootPane should be correctly initialized
-            stage.setScene(detailScene); // Change scene to detail page
-            stage.show(); // Show the new scene
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
     public void searchInitialize(String keyword) {
         RedBlackTree tree = TreeInstance.getInstance().getTree();
 
@@ -171,13 +134,11 @@ public class SearchRecomendationController {
         long durationInNano = endTime - startTime;
         double durationInMillis = durationInNano / 1_000_000.0; // Convert to milliseconds
 
-        // Display search results
+        // hasil cari
         displaySearchResults(keyword, searchResults, durationInMillis);
     }
 
-    /**
-     * Helper method to truncate a description to a maximum number of words.
-     */
+//    buat nampilin description tapi cuma beberapa kata
     private String truncateDescription(String description, int maxWords) {
         String[] words = description.split("\\s+"); // Split by whitespace
         if (words.length <= maxWords) {
@@ -186,12 +147,9 @@ public class SearchRecomendationController {
         return String.join(" ", java.util.Arrays.copyOfRange(words, 0, maxWords)) + "...";
     }
 
-    // Handle ListView item clicks
-    private void handleResultClick(String selectedItem) {
-        System.out.println("You clicked on: " + selectedItem);
-    }
 
-    // Method to set the keyword for the search
+
+    // buat set keyword
     public void setKeyword(String keyword){
         if (keyword != null && !keyword.isEmpty()) {
             searchInitialize(keyword);
@@ -203,34 +161,34 @@ public class SearchRecomendationController {
         String searchInput = searchField.getText().trim();
 
         if (!searchInput.isEmpty()) {
-            // Start timing the search
+            //start waktu buat pencarian
             long startTime = System.nanoTime();
 
-            // Get search results from the tree
+            // hasil search dari tree
             RedBlackTree tree = TreeInstance.getInstance().getTree();
             List<Node> searchResults = tree.searchByPrefix(searchInput);
 
-            // End timing the search
+            // end time
             long endTime = System.nanoTime();
             long durationInNano = endTime - startTime;
             double durationInMillis = durationInNano / 1_000_000.0; // Convert to milliseconds
 
-            // Clear previous search results
+            // bersiin recomendation sebelumnya
             suggestionsRecomendationItem.getChildren().clear();
 
-            // Display search results and duration
+            // Display hasilinput sama hasil sama waktunya
             displaySearchResults(searchInput, searchResults, durationInMillis);
 
-            // Update result text with search duration
+            // embel2 sama waktu
             resultText.setText(String.format("Results for \"%s\" (%.2f ms)", searchInput, durationInMillis));
         }
     }
 
     private void displaySearchResults(String keyword, List<Node> searchResults, double durationInMillis) {
-        // Update resultText to show search duration
+        // buat embel2 sama waktunya
         resultText.setText(String.format("Results for \"%s\" (%.2f ms)", keyword, durationInMillis));
 
-        // Add search results to VBox
+        // foreach setiap item yang didapat waktu nyari
         for (Node node : searchResults) {
             VBox resultItem = new VBox();
             resultItem.setSpacing(10);
@@ -247,14 +205,40 @@ public class SearchRecomendationController {
 
             resultItem.getChildren().addAll(titleText, descriptionText);
 
-            // Set event handler for when the result item is clicked
+            // buka detail page sesuai yang dipilih
             resultItem.setOnMouseClicked(event -> {
-                System.out.println("Item clicked: " + node.getKey()); // Debugging line
-                openDetailPage(node); // Open the detail page for the selected node
+                openDetailPage(node); // buka detailpage
             });
 
-            // Add the result item to the VBox that holds all the search results
+            // display hasil pencarian
             suggestionsRecomendationItem.getChildren().add(resultItem);
+        }
+    }
+    private void openDetailPage(Node node) {
+        try {
+            // Ngeload FXML Detailpage
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/detail-page.fxml"));
+            Parent detailPage = loader.load();
+
+            // Ngambil controller detailpage
+            DetailPageController controller = loader.getController();
+
+            if (node != null) {
+                controller.setNodeData(node);  // set data
+            } else {
+                System.out.println("Node is null, cannot set data in detail page.");
+            }
+
+            // oper scene
+            controller.setPreviousScene(rootPane.getScene()); // rootPane bagian SearchRecomendation
+
+            // displayin scene baru
+            Scene detailScene = new Scene(detailPage);
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            stage.setScene(detailScene); // ganti scene
+            stage.show(); // show scene
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
