@@ -98,7 +98,11 @@ public class Main extends Application {
         tree.insert("Hammer", "A tool with a heavy head used for driving nails or breaking objects.", "Tool, construction, impact");
         tree.insert("Fountain", "A decorative feature in a garden or park, often with water flowing from it.", "Water, decor, relaxation");
         tree.insert("Bicycle Helmet", "A safety helmet worn while riding a bicycle to protect the head.", "Safety, bike, protection");
+        tree.insert("A", "Value A", "Content A", () -> System.out.println("Action for A executed!"));
+        tree.insert("B", "Value B", "Content B", () -> System.out.println("Action for B executed!"));
+        tree.insert("C", "Value C", "Content C");
 
+        tree.executeGimmickForKey("c");
 
     }
 
