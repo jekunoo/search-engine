@@ -200,8 +200,7 @@ public class RedBlackTree {
         root = TNULL;
     }
 
-    public void insert(String key, String value, String content) {
-        Node node = new Node(key, value, content);
+    public void insert(Node node) {
         node.parent = null;
         node.left = TNULL;
         node.right = TNULL;
@@ -227,9 +226,30 @@ public class RedBlackTree {
             y.right = node;
         }
 
-        // Fix the tree
         fixInsert(node);
     }
+
+    public void insert(String key, String value, String content) {
+        Node node = new Node(key, value, content);
+        insert(node);
+    }
+
+    public void insert(String key, String value, String content, Runnable gimmickAction) {
+        GimmickNode node = new GimmickNode(key, value, content, gimmickAction);
+        insert(node);
+    }
+
+    public void executeGimmickForKey(String key) {
+        Node foundNode = search(key);
+        if (foundNode instanceof GimmickNode) {
+            GimmickNode gimmickNode = (GimmickNode) foundNode;
+            gimmickNode.executeGimmick();
+        } else {
+            System.out.println("Key not found or is not a GimmickNode.");
+        }
+    }
+
+
 
     // Preorder traversal
     public void preOrder() {
