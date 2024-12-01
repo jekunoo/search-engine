@@ -41,13 +41,14 @@ public class RedBlackTree {
         if (node.key.toLowerCase().startsWith(prefix)) {
             result.add(node);
         }
-
+        searchByPrefixHelper(node.right, prefix, result);
+        searchByPrefixHelper(node.left, prefix, result);
         // Recursively search in the left and right subtrees
-        if (prefix.compareToIgnoreCase(node.key) < 0) {
-            searchByPrefixHelper(node.left, prefix, result);
-        } else {
-            searchByPrefixHelper(node.right, prefix, result);
-        }
+//        if (prefix.compareToIgnoreCase(node.key) < 0) {
+//
+//        } else {
+//
+//        }
     }
 
     public Node searchByKey(String key) {
@@ -195,7 +196,7 @@ public class RedBlackTree {
     }
 
     public RedBlackTree() {
-        TNULL = new Node("", "", ""); // Sentinel node
+        TNULL = new Node("",""); // Sentinel node
         TNULL.isRed = false;
         root = TNULL;
     }
@@ -229,26 +230,15 @@ public class RedBlackTree {
         fixInsert(node);
     }
 
-    public void insert(String key, String value, String content) {
-        Node node = new Node(key, value, content);
+    public void insert(String key, String value) {
+        Node node = new Node(key, value);
         insert(node);
     }
 
-    public void insert(String key, String value, String content, Runnable gimmickAction) {
-        GimmickNode node = new GimmickNode(key, value, content, gimmickAction);
+    public void insert(String key, String value, String gimmickFXMLPath) {
+        GimmickNode node = new GimmickNode(key, value, gimmickFXMLPath);
         insert(node);
     }
-
-    public void executeGimmickForKey(String key) {
-        Node foundNode = search(key);
-        if (foundNode instanceof GimmickNode) {
-            GimmickNode gimmickNode = (GimmickNode) foundNode;
-            gimmickNode.executeGimmick();
-        } else {
-            System.out.println("Key not found or is not a GimmickNode.");
-        }
-    }
-
 
 
     // Preorder traversal
