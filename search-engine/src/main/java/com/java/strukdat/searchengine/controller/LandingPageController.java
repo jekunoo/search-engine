@@ -27,10 +27,7 @@ public class LandingPageController {
     private TextField searchField;
     @FXML
     private ListView<String> suggestionsList;
-//
-//    private ObservableList<String> allItems = FXCollections.observableArrayList(
-//            "Apple","ata","anjing", "anjing", "Ayam", "Apel", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew", "pornhub", "pineapple", "bokep viral indo"
-//    );
+
 
     private ObservableList<String> filteredItems = FXCollections.observableArrayList();
 

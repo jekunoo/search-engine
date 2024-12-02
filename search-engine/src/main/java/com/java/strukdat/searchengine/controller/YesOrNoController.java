@@ -33,7 +33,7 @@ public class YesOrNoController {
         rotateTransition.setByAngle(360 * 5); // Spin for 5 full rotations
 
         // Generate a random stopping angle between 0 and 360 degrees
-        int randomAngle = random.nextInt(360);
+        int randomAngle = random.nextInt(90);
 
         // Set an onFinished event to stop the wheel at the random angle
         rotateTransition.setOnFinished(event -> {

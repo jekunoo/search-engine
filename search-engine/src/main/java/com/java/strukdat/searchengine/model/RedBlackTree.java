@@ -51,25 +51,6 @@ public class RedBlackTree {
 //        }
     }
 
-    public Node searchByKey(String key) {
-        Node currentNode = root;
-
-        // Traverse the tree to find the node with the given key
-        while (currentNode != TNULL) {
-            int compareResult = key.compareToIgnoreCase(currentNode.key);
-
-            if (compareResult == 0) {
-                return currentNode; // Found the node
-            } else if (compareResult < 0) {
-                currentNode = currentNode.left; // Go left
-            } else {
-                currentNode = currentNode.right; // Go right
-            }
-        }
-
-        // If not found, return null
-        return null;
-    }
 
     public void visualize() {
         if (root == TNULL) {
@@ -108,7 +89,7 @@ public class RedBlackTree {
         }
     }
 
-    // Balance the tree after deletion of a node
+    // seimbangin tree
     private void fixInsert(Node k) {
         Node u;
         while (k.parent != null && k.parent.isRed) { // Check if parent is not null
@@ -156,7 +137,7 @@ public class RedBlackTree {
                 break;
             }
         }
-        root.isRed = false; // Ensure the root is black
+        root.isRed = false;
     }
 
     private void leftRotate(Node x) {
@@ -253,15 +234,15 @@ public class RedBlackTree {
     private void printTreeHelper(Node node, int space) {
         if (node == TNULL) return;
 
-        space += 10; // Increase distance between levels
+        space += 10;
 
-        printTreeHelper(node.right, space); // Process right child first
+        printTreeHelper(node.right, space);
 
         System.out.println();
-        for (int i = 10; i < space; i++) System.out.print(" "); // Print spaces
-        System.out.print(node.key + (node.isRed ? "R" : "B") + "\n"); // Print node key and color
+        for (int i = 10; i < space; i++) System.out.print(" ");
+        System.out.print(node.key + (node.isRed ? "R" : "B") + "\n");
 
-        printTreeHelper(node.left, space); // Process left child
+        printTreeHelper(node.left, space);
     }
 
 }

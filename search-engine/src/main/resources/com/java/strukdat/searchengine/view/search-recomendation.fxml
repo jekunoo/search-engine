@@ -18,7 +18,7 @@
               <children>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1080.0" style="-fx-background-color: black; -fx-padding: 5; -fx-spacing: 0;">
                       <children>
-                          <Label prefHeight="50.0" prefWidth="123.0" style="-fx-font-size: 36; -fx-font-family: 'Impact';" text="CONAN." textFill="WHITE" />
+                          <Label prefHeight="50.0" prefWidth="123.0" style="-fx-font-size: 36; -fx-font-family: 'Impact';" text="Conan." textFill="WHITE" />
                   <TextField fx:id="searchField" prefHeight="33.0" prefWidth="624.0" promptText="Search" style="-fx-background-color: White;" />
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onActionSearchButton" prefHeight="33.0" prefWidth="71.0" style="-fx-background-color: Blue;" text="Search...." textFill="WHITE" />
                       </children>
