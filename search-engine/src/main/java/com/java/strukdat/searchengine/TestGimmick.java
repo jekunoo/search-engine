@@ -12,7 +12,7 @@ public class TestGimmick extends Application {
     public void start(Stage primaryStage) {
         try {
             // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/component/yesOrNo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/java/strukdat/searchengine/view/component/Dice.fxml"));
             Parent root = loader.load();
 
             // Set up the scene
