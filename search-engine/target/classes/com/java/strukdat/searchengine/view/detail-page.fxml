@@ -12,7 +12,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="-1.0" prefHeight="104.0" prefWidth="1081.0" spacing="20.0" style="-fx-background-color: black;">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="CONAN.">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white;" text="Conan.">
                <font>
                   <Font name="Impact" size="35.0" />
                </font>

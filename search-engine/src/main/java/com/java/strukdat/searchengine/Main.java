@@ -208,11 +208,13 @@ public class Main extends Application {
 
 
 //        gimmick
+        tree.insert("Roll A Dice","Dadu adalah objek berbentuk kubus dengan enam sisi, masing-masing dihiasi angka 1 hingga 6 berupa titik. Dadu digunakan dalam permainan untuk menghasilkan angka acak melalui pelemparan. Prinsip kerjanya mengandalkan gravitasi dan momentum, menjadikannya alat sederhana namun penting dalam berbagai jenis permainan dan simulasi probabilitas.","/com/java/strukdat/searchengine/view/component/Dice.fxml");
         tree.insert("Calculator", "Value calculator", "/com/java/strukdat/searchengine/view/component/Calc.fxml");
-        tree.insert("Yes Or No?", "Cahyo Bingung?","/com/java/strukdat/searchengine/view/component/yesOrNo.fxml");
+        tree.insert("Yes Or No?", "Yes or No adalah bentuk jawaban sederhana yang merepresentasikan pilihan biner: \"Ya\" untuk setuju atau \"Tidak\" untuk menolak. Konsep ini digunakan dalam keputusan cepat, pertanyaan tertutup, atau sistem evaluasi logika biner. Jawaban ini efektif dalam menyampaikan respons tegas tanpa memerlukan penjelasan tambahan yang kompleks.","/com/java/strukdat/searchengine/view/component/yesOrNo.fxml");
+        tree.insert("HMIF", "Himpunan Mahasiswa Informatika Institut Teknologi Kalimantan yang selanjutnya disebut HMIF ITK adalah organisasi yang melingkupi seluruh kegiatan kemahasiswaan program studi Informatika di Institut Teknologi Kalimantan. HMIF ITK didirikan pada tanggal 06 Februari 2020. HMIF ITK berkedudukan di Institut Teknologi Kalimantan yang selanjutnya disebut ITK.\r\n" + //
+                "\r\n" + //
+                "Kedaulatan berada di tangan mahasiswa program studi Informatika ITK dan dilaksanakan sepenuhnya berdasarkan Anggaran Dasar dan Anggaran Rumah Tangga Himpunan Mahasiswa Informatika Institut Teknologi Kalimantan yang selanjutnya disebut AD/ART HMIF ITK. HMIF ITK berlandaskan Pancasila dan Undang-Undang Dasar 1945 dengan berasaskan kekeluargaan yang bersifat profesional, demokratis, terbuka dan akuntabel. ", "/com/java/strukdat/searchengine/view/component/hmif-rotate.fxml");
         tree.insert("Date","Tanggal adalah bla bla bla","/com/java/strukdat/searchengine/view/component/Date.fxml");
-
-
     }
 
     public static void main(String[] args) {
