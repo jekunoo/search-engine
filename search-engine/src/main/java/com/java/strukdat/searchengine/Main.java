@@ -208,9 +208,9 @@ public class Main extends Application {
 
 
 //        gimmick
-        tree.insert("Calculator", "Mesin hitung atau kalkulator adalah alat untuk menghitung dari perhitungan sederhana seperti penjumlahan, pengurangan, perkalian dan pembagian sampai kepada kalkulator ilmiah yang dapat menghitung rumus matematika tertentu.", "/com/java/strukdat/searchengine/view/component/Calc.fxml");
-        tree.insert("Yes Or No?", "dalah frasa sederhana yang sering digunakan untuk memberikan jawaban langsung atas sebuah pertanyaan. Namun, dalam kenyataannya, memilih antara \"iya\" atau \"tidak\" tidak selalu mudah. Kebingungan sering muncul karena adanya pertimbangan seperti konsekuensi dari jawaban, kurangnya informasi yang cukup, atau konflik antara logika dan perasaan. Situasi ini biasanya terjadi dalam keputusan yang memiliki dampak signifikan atau melibatkan aspek moral, sosial, atau emosional. Di saat seperti itu, seseorang mungkin ragu, mencari klarifikasi, atau membutuhkan waktu lebih untuk memutuskan apakah jawabannya akan menjadi \"iya\" atau \"tidak.\"","/com/java/strukdat/searchengine/view/component/yesOrNo.fxml");
-        tree.insert("Roll A Dice","Dadu adalah benda kecil berbentuk kubus yang memiliki enam sisi, masing-masing diberi tanda berupa titik atau angka dari 1 hingga 6. Dadu sering digunakan dalam permainan, aktivitas perjudian, atau bahkan simulasi statistik. Cara penggunaannya adalah dengan melemparkannya, dan sisi yang menghadap ke atas setelah berhenti menunjukkan hasil atau angka acak.","/com/java/strukdat/searchengine/view/component/Dice.fxml");
+        tree.insert("Calculator", "Value calculator", "/com/java/strukdat/searchengine/view/component/Calc.fxml");
+        tree.insert("Yes Or No?", "Cahyo Bingung?","/com/java/strukdat/searchengine/view/component/yesOrNo.fxml");
+        tree.insert("Date","Tanggal adalah bla bla bla","/com/java/strukdat/searchengine/view/component/Date.fxml");
 
 
     }
