@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane  prefHeight="347.0" prefWidth="275.0" style="-fx-background-color: #141414;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.strukdat.searchengine.controller.DateController">
+   <children>
+      <Text fx:id="dayText" fill="WHITE" layoutX="52.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunday">
+         <font>
+            <Font name="Impact" size="56.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateText" fill="RED" layoutX="74.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="11th Desember" wrappingWidth="127.3125">
+         <font>
+            <Font name="Impact" size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="yearText" fill="WHITE" layoutX="82.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2024">
+         <font>
+            <Font name="Impact" size="53.0" />
+         </font>
+      </Text>
+      <Text fx:id="todayText" fill="RED" layoutX="108.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Today">
+         <font>
+            <Font name="Impact" size="23.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

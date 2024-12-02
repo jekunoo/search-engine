@@ -210,7 +210,7 @@ public class Main extends Application {
 //        gimmick
         tree.insert("Calculator", "Value calculator", "/com/java/strukdat/searchengine/view/component/Calc.fxml");
         tree.insert("Yes Or No?", "Cahyo Bingung?","/com/java/strukdat/searchengine/view/component/yesOrNo.fxml");
-
+        tree.insert("Date","Tanggal adalah bla bla bla","/com/java/strukdat/searchengine/view/component/Date.fxml");
 
 
     }
