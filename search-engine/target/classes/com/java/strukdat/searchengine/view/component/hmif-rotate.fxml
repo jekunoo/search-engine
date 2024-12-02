@@ -7,7 +7,7 @@
 
 <Pane prefHeight="350.0" prefWidth="255.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java.strukdat.searchengine.controller.HmifController">
    <children>
-      <ImageView fx:id="hmifImg" fitHeight="131.0" fitWidth="136.0" layoutX="62.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="hmifImg" fitHeight="155.0" fitWidth="157.0" layoutX="50.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/hmif-img.jpg" />
          </image>

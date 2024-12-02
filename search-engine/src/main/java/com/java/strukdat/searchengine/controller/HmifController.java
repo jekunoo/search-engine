@@ -20,7 +20,7 @@ public class HmifController {
         // Membuat animasi rotasi
         RotateTransition rotateTransition = new RotateTransition();
         rotateTransition.setNode(hmifImg);
-        rotateTransition.setDuration(Duration.seconds(5)); // Durasi satu rotasi penuh
+        rotateTransition.setDuration(Duration.seconds(2)); // Durasi satu rotasi penuh
         rotateTransition.setByAngle(360); // Sudut rotasi (360 derajat)
         rotateTransition.setCycleCount(RotateTransition.INDEFINITE); // Rotasi tanpa batas
         rotateTransition.setAutoReverse(false); // Tidak membalik arah rotasi
